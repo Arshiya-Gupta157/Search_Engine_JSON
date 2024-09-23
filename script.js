@@ -1,13 +1,10 @@
-// Select elements from the DOM
 const searchInput = document.getElementById('searchInput');
 const searchButton = document.getElementById('searchButton');
 const searchHistoryList = document.getElementById('searchHistoryList');
 const clearHistoryButton = document.getElementById('clearHistoryButton');
 
-// Retrieve search history from localStorage or initialize empty array
 let searchHistory = JSON.parse(localStorage.getItem('searchHistory')) || [];
 
-// Function to render the search history
 function renderSearchHistory() {
   searchHistoryList.innerHTML = '';
 
@@ -22,29 +19,25 @@ function renderSearchHistory() {
   }
 }
 
-// Function to handle search action
 function handleSearch() {
   const query = searchInput.value.trim();
   
   if (query !== '') {
-    searchHistory.push(query); // Add the search term to the history array
-    localStorage.setItem('searchHistory', JSON.stringify(searchHistory)); // Save updated history to localStorage
+    searchHistory.push(query);
+    localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
     
-    searchInput.value = ''; // Clear the input field
-    renderSearchHistory(); // Update the displayed history
+    searchInput.value = '';
+    renderSearchHistory();
   }
 }
 
-// Function to handle clearing the history
 function clearHistory() {
-  searchHistory = []; // Clear the search history array
-  localStorage.setItem('searchHistory', JSON.stringify(searchHistory)); // Clear history from localStorage
-  renderSearchHistory(); // Update the displayed history
+  searchHistory = [];
+  localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
+  renderSearchHistory();
 }
 
-// Attach event listeners
 searchButton.addEventListener('click', handleSearch);
 clearHistoryButton.addEventListener('click', clearHistory);
 
-// Initial rendering of search history
 renderSearchHistory();
